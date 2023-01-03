@@ -1,0 +1,18 @@
+checks for LINEITEM:
+  - failed rows:
+        samples limit: 50
+        fail query: |
+          with duplicated_records as (
+            select
+              L_ORDERKEY,
+              L_PARTKEY
+            from LINEITEM
+            group by L_ORDERKEY, L_PARTKEY
+            having count(*) > 1
+          )
+          select
+            q.*
+          from LINEITEM q
+          join duplicated_records dup
+            on q.L_ORDERKEY = dup.L_ORDERKEY
+            and q.L_PARTKEY = dup.L_PARTKEY

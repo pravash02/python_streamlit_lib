@@ -4,5 +4,3 @@ for each dataset T:
     - exclude TEMP_%
   checks:
     - row_count > 10
-#checks for DATE_DIMENSION:
-#  - missing_count(date_id) = 0

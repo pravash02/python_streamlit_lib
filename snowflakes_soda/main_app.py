@@ -20,6 +20,7 @@ def snowflake_conn():
             account='to55035.central-india.azure',
             warehouse='PRAY_TEST'
         )
+        conn.autocommit(True)
         cur = conn.cursor()
         st.write('connection is successful')
         st.write(cur)
@@ -31,9 +32,17 @@ def snowflake_conn():
 def snowflake_db_query():
     conn, cur = snowflake_conn()
     try:
-        cur.execute("select * from SNOWFLAKE_SAMPLE_DATA.TPCH_SF100.CUSTOMER")
-        one_row = cur.fetchone()
-        print(one_row)
+        # cur.execute("select * from SNOWFLAKE_SAMPLE_DATA.TPCH_SF100.CUSTOMER")
+        # one_row = cur.fetchone()
+
+        tbl_list = []
+        cur.execute("SHOW TABLES IN snowflake_sample_data.tpch_sf100")
+        sfqid = cur.__dict__['_sfqid']      # last executed query
+        cur.execute(f"select * from table(result_scan('{sfqid}'))")
+        tbl_names = cur.fetchall()
+        for tup in tbl_names:
+            tbl_list.append(tup[1])
+        return tbl_list
     except Exception as e:
         print(e)
     finally:
@@ -58,7 +67,6 @@ def main(file_path, files):
 
         row_data = df.to_dict("records")
         column_data = [{"field": col, "headerName": col} for col in df.columns]
-        # print(row_ata, column_ata)
         st.write(df)
 
 
@@ -69,5 +77,4 @@ if __name__ == '__main__':
     json_files = [pos_json for pos_json in os.listdir(path_to_json) if pos_json.endswith('.json')]
     # print(path_to_json, json_files)
     # main(path_to_json, json_files)
-    # snowflake_conn()
     snowflake_db_query()
