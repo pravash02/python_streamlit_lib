@@ -1,0 +1,151 @@
+{
+    "definitionName": null,
+    "defaultDataSource": "snowflake_sample_data",
+    "dataTimestamp": "2023-01-03T11:52:00+00:00",
+    "scanStartTimestamp": "2023-01-03T11:52:00+00:00",
+    "scanEndTimestamp": "2023-01-03T11:52:01+00:00",
+    "hasErrors": false,
+    "hasWarnings": false,
+    "hasFailures": true,
+    "metrics": [
+        {
+            "identity": "metric-snowflake_sample_data-LINEITEM-failed rows-bbb0e657",
+            "metricName": "failed rows",
+            "value": 144,
+            "dataSourceName": "snowflake_sample_data"
+        }
+    ],
+    "checks": [
+        {
+            "identity": "4dd847f9",
+            "name": "failed rows",
+            "type": "metricThreshold",
+            "definition": "checks for LINEITEM:\n  - failed rows:\n      samples limit: 50\n      fail query: |-\n        with duplicated_records as (\n          select\n            L_ORDERKEY,\n            L_PARTKEY\n          from LINEITEM\n          group by L_ORDERKEY, L_PARTKEY\n          having count(*) > 1\n        )\n        select\n          q.*\n        from LINEITEM q\n        join duplicated_records dup\n          on q.L_ORDERKEY = dup.L_ORDERKEY\n          and q.L_PARTKEY = dup.L_PARTKEY\n",
+            "attributes": {},
+            "location": {
+                "filePath": "./checks/lineitem_check.yml",
+                "line": 2,
+                "col": 5
+            },
+            "dataSource": "snowflake_sample_data",
+            "table": "LINEITEM",
+            "filter": null,
+            "column": null,
+            "metrics": [
+                "metric-snowflake_sample_data-LINEITEM-failed rows-bbb0e657"
+            ],
+            "outcome": "fail",
+            "outcomeReasons": [],
+            "archetype": null
+        }
+    ],
+    "automatedMonitoringChecks": [],
+    "profiling": [],
+    "metadata": [],
+    "logs": [
+        {
+            "level": "INFO",
+            "message": "Soda Core 3.0.16",
+            "timestamp": "2023-01-03T11:52:00+00:00",
+            "index": 16,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Reading SodaCL file \"./checks/lineitem_check.yml\"",
+            "timestamp": "2023-01-03T11:52:00+00:00",
+            "index": 17,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Scan execution starts",
+            "timestamp": "2023-01-03T11:52:00+00:00",
+            "index": 18,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Query snowflake_sample_data.failed_rows[failed rows]:\nwith duplicated_records as (\n  select\n    L_ORDERKEY,\n    L_PARTKEY\n  from LINEITEM\n  group by L_ORDERKEY, L_PARTKEY\n  having count(*) > 1\n)\nselect\n  q.*\nfrom LINEITEM q\njoin duplicated_records dup\n  on q.L_ORDERKEY = dup.L_ORDERKEY\n  and q.L_PARTKEY = dup.L_PARTKEY",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 19,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "Using DefaultSampler",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 20,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "Scan summary:",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 21,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "1/1 query OK",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 22,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "  snowflake_sample_data.failed_rows[failed rows] [OK] 0:00:00.201495",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 23,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "1/1 check FAILED: ",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 24,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "    LINEITEM in snowflake_sample_data",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 25,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "      failed rows [./checks/lineitem_check.yml] [FAILED]",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 26,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "        value: 144",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 27,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "Oops! 1 failures. 0 warnings. 0 errors. 0 pass.",
+            "timestamp": "2023-01-03T11:52:01+00:00",
+            "index": 28,
+            "doc": null,
+            "location": null
+        }
+    ]
+}

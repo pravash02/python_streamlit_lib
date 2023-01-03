@@ -1,0 +1,159 @@
+{
+    "definitionName": null,
+    "defaultDataSource": "snowflake_sample_data",
+    "dataTimestamp": "2023-01-03T11:52:32+00:00",
+    "scanStartTimestamp": "2023-01-03T11:52:32+00:00",
+    "scanEndTimestamp": "2023-01-03T11:52:34+00:00",
+    "hasErrors": false,
+    "hasWarnings": false,
+    "hasFailures": false,
+    "metrics": [
+        {
+            "identity": "metric-snowflake_sample_data-CUSTOMER-row_count",
+            "metricName": "row_count",
+            "value": 15000000,
+            "dataSourceName": "snowflake_sample_data"
+        }
+    ],
+    "checks": [
+        {
+            "identity": "bac44f4c",
+            "name": "row_count > 10",
+            "type": "metricThreshold",
+            "definition": "checks for T being CUSTOMER:\n  row_count > 10",
+            "attributes": {},
+            "location": {
+                "filePath": "./checks/customer_check.yml",
+                "line": 6,
+                "col": 7
+            },
+            "dataSource": "snowflake_sample_data",
+            "table": "CUSTOMER",
+            "filter": null,
+            "column": null,
+            "metrics": [
+                "metric-snowflake_sample_data-CUSTOMER-row_count"
+            ],
+            "outcome": "pass",
+            "outcomeReasons": [],
+            "archetype": null
+        }
+    ],
+    "automatedMonitoringChecks": [],
+    "profiling": [],
+    "metadata": [],
+    "logs": [
+        {
+            "level": "INFO",
+            "message": "Soda Core 3.0.16",
+            "timestamp": "2023-01-03T11:52:32+00:00",
+            "index": 29,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Reading SodaCL file \"./checks/customer_check.yml\"",
+            "timestamp": "2023-01-03T11:52:32+00:00",
+            "index": 30,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Scan execution starts",
+            "timestamp": "2023-01-03T11:52:32+00:00",
+            "index": 31,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Query snowflake_sample_data.for_each_dataset_T[0]:\nSELECT table_name \nFROM information_schema.tables\nWHERE (table_name like '%CUSTOMER')\n      AND table_name not like 'TEMP_%'\n      AND lower(table_schema) = 'tpch_sf100'",
+            "timestamp": "2023-01-03T11:52:32+00:00",
+            "index": 32,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "Query snowflake_sample_data.CUSTOMER.aggregation[0]:\nSELECT \n  COUNT(*) \nFROM TPCH_SF100.CUSTOMER",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 33,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "Scan summary:",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 34,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "2/2 queries OK",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 35,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "  snowflake_sample_data.for_each_dataset_T[0] [OK] 0:00:01.381789",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 36,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "DEBUG",
+            "message": "  snowflake_sample_data.CUSTOMER.aggregation[0] [OK] 0:00:00.133494",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 37,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "1/1 check PASSED: ",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 38,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "    CUSTOMER in snowflake_sample_data",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 39,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "      row_count > 10 [./checks/customer_check.yml] [PASSED]",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 40,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "        check_value: 15000000",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 41,
+            "doc": null,
+            "location": null
+        },
+        {
+            "level": "INFO",
+            "message": "All is good. No failures. No warnings. No errors.",
+            "timestamp": "2023-01-03T11:52:34+00:00",
+            "index": 42,
+            "doc": null,
+            "location": null
+        }
+    ]
+}

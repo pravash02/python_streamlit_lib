@@ -1,3 +1,7 @@
+# snowflakes_soda % streamlit run soda_scan.py
+
+
+import json
 from soda.scan import Scan
 import streamlit as st
 from soda.sampler.sampler import Sampler
@@ -17,6 +21,7 @@ scan.set_verbose(True)
 
 required_fields = ['defaultdataSource', 'table', 'outcome', 'logs.message']
 
+
 def run_scan(scan):
     # execute the scan
     scan.execute()
@@ -26,9 +31,14 @@ def run_scan(scan):
     return res
 
 
+def write_json(file_nm, json_res):
+    with open(f"./json_output/{file_nm}.json", "w") as write_file:
+        json.dump(json_res, write_file, indent=4)
+
 # getting table list
 # tbl_list = snowflake_db_query
 # print(tbl_list)
+
 
 option = st.selectbox('Select a SnowFlakes Dataset',
                       ('', 'CUSTOMER', 'LINEITEM'),
@@ -50,4 +60,6 @@ else:
         temp1 = scan.get_all_checks_text()
         # out = {item: json_res.get(item) for item in required_fields}
         st.write(f"{temp1}")
+        write_json(option, json_res)
+
 
