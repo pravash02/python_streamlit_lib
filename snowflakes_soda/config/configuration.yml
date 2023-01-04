@@ -2,7 +2,7 @@ data_source snowflake_sample_data:
   type: snowflake
   connection:
     username: pravash02
-    password: Prav@041193
+    password: '***'
     account: vrcleuv-ie46785
     database: SNOWFLAKE_SAMPLE_DATA
     warehouse: PRAY_TEST
