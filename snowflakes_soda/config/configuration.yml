@@ -1,3 +1,4 @@
+# soda scan -d snowflake_sample_data -c configuration.yml checks.yml
 data_source snowflake_sample_data:
   type: snowflake
   connection:
@@ -14,4 +15,18 @@ data_source snowflake_sample_data:
       QUOTED_IDENTIFIERS_IGNORE_CASE: false
   schema: TPCH_SF100
 
-# soda scan -d snowflake_sample_data -c configuration.yml checks.yml
+data_source soda_test:
+  type: snowflake
+  connection:
+    username: pravash02
+    password: '***'
+    account: vrcleuv-ie46785
+    database: SODA_TEST
+    warehouse: PRAY_TEST
+    connection_timeout: 300
+    role: ACCOUNTADMIN
+    client_session_keep_alive:
+    session_parameters:
+      QUERY_TAG: soda-queries
+      QUOTED_IDENTIFIERS_IGNORE_CASE: false
+  schema: SODA_SCHEMA_POC
