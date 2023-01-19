@@ -1,0 +1,19 @@
+# the first line names the datasource "MY_DATASOURCE"
+data_source soda_test:
+  type: snowflake
+  connection:
+    # provide your snowflake username and password in double quotes
+    username: pravash02
+    password: ****
+    # provide the account in the format xy12345.eu-central-1
+    account: vrcleuv-ie46785
+    database: SODA_TEST
+    warehouse: PRAY_TEST
+    # if your connection times out you may need to adjust the timeout value
+    connection_timeout: 300
+    role: ACCOUNTADMIN
+    client_session_keep_alive:
+    session_parameters:
+      QUERY_TAG: soda-queries
+      QUOTED_IDENTIFIERS_IGNORE_CASE: false
+  schema: SODA_SCHEMA_POC
