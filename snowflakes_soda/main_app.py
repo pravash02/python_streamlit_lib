@@ -16,7 +16,7 @@ def snowflake_conn():
     try:
         conn = snowflake.connector.connect(
             user='pravash02',
-            password='*****',
+            password='Prav@041193',
             account='to55035.central-india.azure',
             warehouse='PRAY_TEST'
         )

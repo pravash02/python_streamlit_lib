@@ -8,7 +8,7 @@ import json
 connection_parameters = {
     "account": "vrcleuv-ie46785",
     "user": "pravash02",
-    "password": "***",
+    "password": "Prav@041193",
     "role": "ACCOUNTADMIN",  # optional
     "warehouse": "PRAY_TEST",  # optional
     "database": "SODA_TEST",  # optional
